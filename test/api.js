@@ -1,8 +1,11 @@
 const { expect } = require('chai');
 const chai = require('chai');
+chai.use(require('chai-json-schema'));
 const request = require('supertest');
+let chakram = require('chakram');
+let chakramExpect = chakram.expect;
 // const pet = require('./fixtures/petDetails.json');
-import { params } from './fixtures/petData.js'
+import { params, petSchema } from './fixtures/petData.js'
 chai.should();
 
 /**
@@ -73,6 +76,15 @@ describe('REST Pet API Tests', () => {
                 expect(res.body["status"]).to.equal(params.petObj.status);
             })
             .end(done);
+    });
+
+    it.only("should offer simple HTTP request capabilities", async function () {
+        // let response = await chakram.get("http://httpbin.org/get");
+        petId = 15154;
+        let response = await chakram.get(`${baseUrl}/pet/${petId}`);
+        console.log(`API Response is ${JSON.stringify(response.body)}`);
+        chakramExpect(response).to.have.status(200);
+        chakramExpect(response).to.have.schema(petSchema);
     });
 
 });

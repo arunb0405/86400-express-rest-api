@@ -60,6 +60,8 @@
     "@types/swagger-jsdoc": "^0.0.2",
     "@types/swagger-ui-express": "^3.0.1",
     "chai": "^4.2.0",
+    "chai-json-schema": "^1.5.1",
+    "chakram": "^1.5.0",
     "i": "^0.3.7",
     "jsdoc": "^3.6.3",
     "mocha": "^6.2.2",
