@@ -47,8 +47,8 @@ describe('REST Pet API Tests', () => {
 
     it(`Updates the Pet with ID - ${randomNum}`, (done) => {
         // Update Pet Category & status in PUT Req
-        params.petObj.category.name = "I'm A Popular Australian Bird !!!";
-        params.petObj.status = "Over the Horizon";
+        params.petObj.category.name = "I'm A Commonwealth Animal !!!";
+        params.petObj.status = "Boxing";
 
         console.log(`Updating Pet ID is :- ${petId}`);
         request(baseUrl)
@@ -78,13 +78,23 @@ describe('REST Pet API Tests', () => {
             .end(done);
     });
 
-    it.only("should offer simple HTTP request capabilities", async function () {
+    it(`Executes Get ${randomNum} Pet with Chakram framework - `, async function () {
         // let response = await chakram.get("http://httpbin.org/get");
-        petId = 15154;
         let response = await chakram.get(`${baseUrl}/pet/${petId}`);
         console.log(`API Response is ${JSON.stringify(response.body)}`);
         chakramExpect(response).to.have.status(200);
+        expect(response.body.name).to.equal(params.petObj.name);
         chakramExpect(response).to.have.schema(petSchema);
     });
 
+    it(`DELETE Pet with ID - ${randomNum}`, (done) => {
+        request(baseUrl)
+            .delete(`/pet/${petId}`)
+            // .set('Authorization', global.bearerToken)
+            .expect((res) => {
+                res.status.should.equal(200);
+                console.log(`DELETE API Response is - ${JSON.stringify(res.body)} is Success`)
+            })
+            .end(done);
+    });
 });

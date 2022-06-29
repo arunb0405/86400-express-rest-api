@@ -13,9 +13,6 @@
   "description": "This template will help you to test REST API using TypeScript.",
   "license": "MIT",
   "scripts": {
-    "build": "tsc --skipLibCheck",
-    "start": "tsc --skipLibCheck && node ./build/index.js",
-    "dev": "nodemon",
     "test": "mocha -r ts-node/register test/api.js --reporter mocha-simple-html-reporter --reporter-options output=Api_Test_Report.html --exit",
     "lint": "tslint -p tsconfig.json --fix",
     "petTest": "mocha -r ts-node/register test/api.js --exit"

@@ -423,13 +423,13 @@ body {
                     <li><span id="toggle-passes" class="toggle-passes">show failures only</span></li>
                 </ul>
                 <ul class="mocha-stats">
-                    <li class="passes">passes: <em>3</em></li>
+                    <li class="passes">passes: <em>4</em></li>
                     <li class="pending">pending: <em>0</em></li>
-                    <li class="failures">failures: <em>0</em></li>
-                    <li class="duration">duration: <em>2.8s</em></li>
+                    <li class="failures">failures: <em>1</em></li>
+                    <li class="duration">duration: <em>5.6s</em></li>
                 </ul>
             </div>
-            <ul id="report"><li class="suite"><h1>REST Pet API Tests</h1><ul><li class="test pass slow"><h2>Creates a new PET<span class="duration">1100ms</span></h2><pre><code>console.log(&#x60;Posted Pet ID is :- ${petId}&#x60;);
+            <ul id="report"><li class="suite"><h1>REST Pet API Tests</h1><ul><li class="test pass slow"><h2>Creates a new PET<span class="duration">1251ms</span></h2><pre><code>console.log(&#x60;Posted Pet ID is :- ${petId}&#x60;);
 request(baseUrl)
     .post(&#x27;/pet&#x27;)
     .send(petData_js_1.params.petObj)
@@ -442,7 +442,7 @@ request(baseUrl)
     expect(res.body[&#x22;name&#x22;]).to.equal(petData_js_1.params.petObj.name);
     expect(res.body[&#x22;category&#x22;].name).to.equal(petData_js_1.params.petObj.category.name);
 })
-    .end(done);</code></pre></li><li class="test pass slow"><h2>Updates the Pet with ID - 65283<span class="duration">870ms</span></h2><pre><code>// Update Pet Category &#x26; status in PUT Req
+    .end(done);</code></pre></li><li class="test pass slow"><h2>Updates the Pet with ID - 46994<span class="duration">1200ms</span></h2><pre><code>// Update Pet Category &#x26; status in PUT Req
 petData_js_1.params.petObj.category.name = &#x22;I&#x27;m A Popular Australian Bird !!!&#x22;;
 petData_js_1.params.petObj.status = &#x22;Over the Horizon&#x22;;
 console.log(&#x60;Updating Pet ID is :- ${petId}&#x60;);
@@ -456,7 +456,7 @@ request(baseUrl)
     expect(res.body[&#x22;name&#x22;]).to.equal(petData_js_1.params.petObj.name);
     expect(res.body[&#x22;category&#x22;].name).to.equal(petData_js_1.params.petObj.category.name);
 })
-    .end(done);</code></pre></li><li class="test pass slow"><h2>Retrieve Pet with ID - 65283<span class="duration">856ms</span></h2><pre><code>request(baseUrl)
+    .end(done);</code></pre></li><li class="test pass slow"><h2>Retrieve Pet with ID - 46994<span class="duration">1117ms</span></h2><pre><code>request(baseUrl)
     .get(&#x60;/pet/${petId}&#x60;)
     // .set(&#x27;Authorization&#x27;, global.bearerToken)
     .expect((res) =&#x3E; {
@@ -466,7 +466,25 @@ request(baseUrl)
     expect(res.body[&#x22;category&#x22;].name).to.equal(petData_js_1.params.petObj.category.name);
     expect(res.body[&#x22;status&#x22;]).to.equal(petData_js_1.params.petObj.status);
 })
-    .end(done);</code></pre></li></ul></li></ul>
+    .end(done);</code></pre></li><li class="test pass slow"><h2>DELETE Pet with ID - 46994<span class="duration">920ms</span></h2><pre><code>request(baseUrl)
+    .delete(&#x60;/pet/${petId}&#x60;)
+    // .set(&#x27;Authorization&#x27;, global.bearerToken)
+    .expect((res) =&#x3E; {
+    console.log(&#x60;DELETE API Response is - ${JSON.stringify(res.body)}&#x60;);
+    res.status.should.equal(200);
+})
+    .end(done);</code></pre></li><li class="test fail"><h2>should offer simple HTTP request capabilities</h2><pre><code>return __awaiter(this, void 0, void 0, function* () {
+    // let response = await chakram.get(&#x22;http://httpbin.org/get&#x22;);
+    let response = yield chakram.get(&#x60;${baseUrl}/pet/${petId}&#x60;);
+    console.log(&#x60;API Response is ${JSON.stringify(response.body)}&#x60;);
+    chakramExpect(response).to.have.status(200);
+    expect(response.body.name).to.equal(petData_js_1.params.petObj.name);
+    chakramExpect(response).to.have.schema(petData_js_1.petSchema);
+});</code></pre><pre class="error">AssertionError: expected status code 404 to equal 200
+    at Context.&#x3C;anonymous&#x3E; (test\api.js:96:41)
+    at Generator.next (&#x3C;anonymous&#x3E;)
+    at fulfilled (test\api.js:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)</pre></li></ul></li></ul>
         </div>
         <script>
         function hideSuitesWithout(className) {

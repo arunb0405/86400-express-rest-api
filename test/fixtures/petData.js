@@ -5,9 +5,9 @@ export const params = {
         "id": 1990,
         "category": {
             "id": 100,
-            "name": "Australian Bird"
+            "name": "Australian Pet"
         },
-        "name": "laughing kookaburra",
+        "name": "Kangaroo",
         "photoUrls": [
             "string"
         ],
@@ -17,7 +17,7 @@ export const params = {
                 "name": "string"
             }
         ],
-        "status": "Laughing Loud"
+        "status": "Hopping"
     }
 };
 
